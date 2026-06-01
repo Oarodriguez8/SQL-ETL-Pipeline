@@ -28,7 +28,7 @@ def run():
         logger.info(f"\nProcessing Clientes: {db} -> {dest_table}")
 
         try:
-            df_raw = cf.get_mock_clientes() 
+            df_raw = cf.mock_clientes() 
             df_clean = transform(df_raw, key)
             load_table(df_clean, dest_table, target_engine)
         except Exception as exc:
