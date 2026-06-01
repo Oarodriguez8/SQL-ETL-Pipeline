@@ -7,12 +7,12 @@ from rapidfuzz import process, fuzz
 # Databases and Companies
 db_go = 'GRUPO_DRINKS'
 bases_datos = {"Exportacion": "DB_EXPORT", "Local": "DB_LOCAL", "Bodegas": "DB_SUPPLY"}
-compania = ["Oliver", "Rones", "Bodegas"]
+compania = ["Export", "Local", "Supply"]
 
 # Mappings
 tipoproducto = {"PT": "Producto Terminado", "SV": "Servicios", "BP": "Botellas Producto Terminado"}
 grupo_cliente = {'ACCIONISTA': 'ACCIONISTA', 'LOCAL': 'NACIONAL', 'Internacionales': 'INTERNACIONAL'}
-pais_corregido_oliver = {"C00020": "USA", "C00103": "Czech Republic", "C00097": "Austria"}
+pais_corregido = {"C00020": "USA", "C00103": "Czech Republic", "C00097": "Austria"}
 
 # Helper
 def fuzzy_match(value, choices, threshold=80):
