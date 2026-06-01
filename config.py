@@ -1,4 +1,76 @@
+import pandas as pd
+import numpy as np
 from rapidfuzz import process, fuzz
+
+# Databases and Companies
+db_go = 'GRUPO OLIVER'
+bases_datos = {"Oliver": "DB_OLIVER_OLIVER", "Rones": "DB_RONES", "Bodegas": "DB_BODEGAS_PEDRO"}
+compania = ["Oliver", "Rones", "Bodegas"]
+
+# Mappings
+tipoproducto = {"PT": "Producto Terminado", "SV": "Servicios", "BP": "Botellas Producto Terminado"}
+client_name = {'Inversiones TUNC': 'DUFRY REP. DOMINICANA', 'Inversiones TUNC, SRL': 'DUFRY REP. DOMINICANA'}
+grupo_cliente = {'ACCIONISTA': 'ACCIONISTA', 'LOCAL': 'NACIONAL', 'Internacionales': 'INTERNACIONAL'}
+pais_corregido_oliver = {"C00020": "USA", "C00103": "Czech Republic", "C00097": "Austria"}
+
+# Helper
+def fuzzy_match(value, choices, threshold=80):
+    if pd.isna(value) or value == "":
+        return None
+    match = process.extractOne(value, choices, scorer=fuzz.token_sort_ratio)
+    return match[0] if match and match[1] >= threshold else None
+
+# ─────────────────────────────────────────────
+# Mock Data Generators (Replace with pd.read_sql in production)
+# ─────────────────────────────────────────────
+
+def mock_ventas():
+    return pd.DataFrame({
+        'Codigo': ['C001', 'C002'], 'CardName': ['Inversiones TUNC', 'Local Corp'],
+        'Fecha': pd.to_datetime(['2023-10-01', '2023-10-02']),
+        'Invoice Number': ['INV-100', 'INV-101'], 'Currency Exchange': [56.5, 1.0],
+        'Código': ['PT-100', 'SV-200'], 'Articulo': ['Ron Punta Cana', 'Servicio Embotellado'],
+        'Precio de Articulo': [15.0, 50.0], 'Cantidad Total': [100, 5],
+        'Monto Total': [1500.0, 250.0], 'Costo': [800.0, 100.0],
+        'Net Revenue': [700.0, 150.0], 'Comments': ['Ok', 'Rush']
+    })
+
+def mock_clientes():
+    return pd.DataFrame({
+        'CardCode': ['C001', 'C002'], 'CardName': ['Inversiones TUNC', 'Test Client'],
+        'CustomerType': ['C', 'C'], 'validFor': ['Y', 'N'],
+        'Address': ['Street 1', 'Street 2'], 'Phone': ['555-1234', '555-9876'],
+        'ContactPerson': ['John', 'Jane'], 'Email': ['j@test.com', 'a@test.com'],
+        'AccountBalance': [1000.0, 0.0], 'TaxGroup': ['TG1', 'TG2'],
+        'CustomerGroup': ['Internacionales', 'LOCAL'], 'PymntConditions': ['Net30', 'Cash'],
+        'Country': ['C00020', 'DO'], 'Pais': ['USA', 'Dom Rep'], 'CreateDate': pd.Timestamp.now()
+    })
+
+def get_mock_ordenes():
+    return pd.DataFrame({
+        'Document': ['Order', 'Order'], 'OrderNumber': [1001, 1002],
+        'OrderDate': pd.to_datetime(['2023-10-01', '2023-10-02']),
+        'CustomerCode': ['C001', 'C002'], 'CustomerName': ['Client A', 'Client B'],
+        'SKU': ['PT-100', 'SV-200'], 'Quantity': [50, 10], 'Price': [20.0, 5.0],
+        'LineTotal': [1000.0, 50.0], 'Comments': ['None', 'None'], 'QuoteStatus': ['Open', 'Closed']
+    })
+
+def mock_productos():
+    return pd.DataFrame({
+        'CodigoSAP': ['PT-100', 'SV-200', 'BP-300'],
+        'Descripcion': ['Puntacana Club XOX', 'Servicio Generico', 'Botella Vacia']
+    })
+
+def mock_cashflow():
+    return pd.DataFrame({
+        'Date': pd.to_datetime(['2023-10-01', '2023-10-02']),
+        'Period': ['2023-10', '2023-10'], 'Flow Type': ['AR Receipt', 'AP Payment'],
+        'BP Code': ['C001', 'V001'], 'BP Name': ['Client A', 'Vendor B'],
+        'Document No': [5001, 6001], 'Reference': ['REF1', 'REF2'],
+        'Bank Account': ['BHD Principal', 'Banreservas'], 'Currency': ['USD', 'DOP'],
+        'Amount (Doc)': [1000.0, 500.0], 'Amount (FC)': [1000.0, 0.0],
+        'Inflow': [1000.0, 0.0], 'Outflow': [0.0, 500.0], 'Remarks': ['Paid', 'Rent']
+    })from rapidfuzz import process, fuzz
 
 # Databases and Companies
 db_go = 'GRUPO OLIVER'
