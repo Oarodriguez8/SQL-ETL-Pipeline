@@ -21,7 +21,7 @@ def run():
         logger.info(f"\nProcessing Ordenes: {db} -> {dest_table}")
 
         try:
-            df_raw = cf.get_mock_ordenes()
+            df_raw = cf.mock_ordenes()
             df_clean = transform(df_raw, key)
             load_table(df_clean, dest_table, target_engine)
         except Exception as exc:
