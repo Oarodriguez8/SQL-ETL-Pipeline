@@ -17,12 +17,12 @@ def transform(df: pd.DataFrame, company: str) -> pd.DataFrame:
     ).map(cf.grupo_cliente).fillna(df["CustomerGroup"]).str.title()
 
     if company == 'Oliver':
-        df["Pais_corregido"] = df["Country"].map(cf.pais_corregido_oliver).fillna(df["Pais"])
+        df["Pais_corregido"] = df["Country"].map(cf.pais_corregido_export).fillna(df["Pais"])
 
     return df
 
 def run():
-    target_engine = get_engine("GRUPO_OLIVER")
+    target_engine = get_engine("GRUPO_EXPORT")
     for key, db in cf.bases_datos.items():
         dest_table = f"Clientes_{key}"
         logger.info(f"\nProcessing Clientes: {db} -> {dest_table}")
