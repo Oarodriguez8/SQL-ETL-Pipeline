@@ -15,7 +15,7 @@ def transform(df: pd.DataFrame, company: str) -> pd.DataFrame:
     return df.rename(columns=col_map)
 
 def run():
-    target_engine = get_engine("GRUPO_OLIVER")
+    target_engine = get_engine("GRUPO_EXPORT")
     for key, db in cf.bases_datos.items():
         dest_table = f"Ordenes_{key}"
         logger.info(f"\nProcessing Ordenes: {db} -> {dest_table}")
