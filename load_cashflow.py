@@ -9,7 +9,7 @@ def transform(df: pd.DataFrame, company: str) -> pd.DataFrame:
     return df
 
 def run():
-    target_engine = get_engine("GRUPO_OLIVER")
+    target_engine = get_engine("GRUPO_DRINKS")
     for key, db in cf.bases_datos.items():
         dest_table = f"Cashflow_{key}"
         logger.info(f"\nProcessing Cashflow: {db} -> {dest_table}")
