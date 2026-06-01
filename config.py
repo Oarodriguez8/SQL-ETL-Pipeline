@@ -2,9 +2,11 @@ import pandas as pd
 import numpy as np
 from rapidfuzz import process, fuzz
 
+(`DB_EXPORT`, `DB_LOCAL`, and `DB_SUPPLY`)
+
 # Databases and Companies
-db_go = 'GRUPO OLIVER'
-bases_datos = {"Oliver": "DB_OLIVER_OLIVER", "Rones": "DB_RONES", "Bodegas": "DB_BODEGAS_PEDRO"}
+db_go = 'GRUPO_DRINKS'
+bases_datos = {"Exportacion": "DB_EXPORT", "Local": "DB_LOCAL", "Bodegas": "DB_SUPPLY"}
 compania = ["Oliver", "Rones", "Bodegas"]
 
 # Mappings
@@ -46,7 +48,7 @@ def mock_clientes():
         'Country': ['C00020', 'DO'], 'Pais': ['USA', 'Dom Rep'], 'CreateDate': pd.Timestamp.now()
     })
 
-def get_mock_ordenes():
+def mock_ordenes():
     return pd.DataFrame({
         'Document': ['Order', 'Order'], 'OrderNumber': [1001, 1002],
         'OrderDate': pd.to_datetime(['2023-10-01', '2023-10-02']),
@@ -72,10 +74,6 @@ def mock_cashflow():
         'Inflow': [1000.0, 0.0], 'Outflow': [0.0, 500.0], 'Remarks': ['Paid', 'Rent']
     })from rapidfuzz import process, fuzz
 
-# Databases and Companies
-db_go = 'GRUPO OLIVER'
-bases_datos = {"Oliver": "DB_OLIVER_OLIVER", "Rones": "DB_RONES", "Bodegas": "DB_BODEGAS_PEDRO"}
-compania = ["Oliver", "Rones", "Bodegas"]
 
 def fuzzy_match(value, choices):
     if not value: return None
