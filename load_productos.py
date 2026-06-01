@@ -20,13 +20,13 @@ def transform(df: pd.DataFrame, company: str) -> pd.DataFrame:
     return df
 
 def run():
-    target_engine = get_engine("GRUPO_OLIVER")
+    target_engine = get_engine("GRUPO_EXPORT")
     for key, db in cf.bases_datos.items():
         dest_table = f"Productos_{key}"
         logger.info(f"\nProcessing Productos: {db} -> {dest_table}")
 
         try:
-            df_raw = cf.get_mock_productos()
+            df_raw = cf.mock_productos()
             df_clean = transform(df_raw, company=key)
             load_table(df_clean, dest_table, target_engine)
         except Exception as exc:
