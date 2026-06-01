@@ -38,7 +38,7 @@ def transform(df: pd.DataFrame) -> pd.DataFrame:
 # __________________________________________________________________________
 
 def run():
-    target_engine = get_engine("GRUPO_OLIVER")
+    target_engine = get_engine("GRUPO_DRINKS")
     
     for x, (key, db) in enumerate(cf.bases_datos.items()):
         dest_table = f"Ventas_{key}"
