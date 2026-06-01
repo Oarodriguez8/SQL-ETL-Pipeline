@@ -30,7 +30,7 @@ The pipeline utilizes a modular multi-tier ETL (Extract, Transform, Load) model.
 
 ---
 
-Step 1: Initialization
+### Step 1: Initialization
 
 Execute the master process from the command-line interface or scheduling wrapper:
 Bash
@@ -38,7 +38,7 @@ Bash
 ```python main.py```
 
 Upon execution, utils.py boots the logger, instantiates a file-writer appender to pipeline.log, and securely reads database coordinates from the environment.
-Step 2: Extraction
+### Step 2: Extraction
 
 The orchestrator walks through each registered sub-pipeline sequentially (Ventas -> Clientes -> Ordenes -> Productos -> Cashflow -> Calendario). For each domain, the pipeline connects to the respective source instances defined in config.py (`DB_EXPORT`, `DB_LOCAL`, and `DB_SUPPLY`) and queries the raw operational tables.
 
