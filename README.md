@@ -40,7 +40,7 @@ Bash
 Upon execution, utils.py boots the logger, instantiates a file-writer appender to pipeline.log, and securely reads database coordinates from the environment.
 Step 2: Extraction
 
-The orchestrator walks through each registered sub-pipeline sequentially (Ventas -> Clientes -> Ordenes -> Productos -> Cashflow -> Calendario). For each domain, the pipeline connects to the respective source instances defined in config.py (DB_OLIVER_OLIVER, DB_RONES, and DB_BODEGAS_PEDRO) and queries the raw operational tables.
+The orchestrator walks through each registered sub-pipeline sequentially (Ventas -> Clientes -> Ordenes -> Productos -> Cashflow -> Calendario). For each domain, the pipeline connects to the respective source instances defined in config.py (`DB_EXPORT`, `DB_LOCAL`, and `DB_SUPPLY`) and queries the raw operational tables.
 
 Upon execution, `utils.py` boots the logger, instantiates a file-writer appender to `pipeline.log`, and securely reads database coordinates from the environment.
 
