@@ -1,6 +1,6 @@
 
 
- """# Grupo Drinks Data Pipeline: Operational Guide & Architecture Overview
+ # Grupo Drinks Data Pipeline: Operational Guide & Architecture Overview
 
 This document provides a comprehensive operational guide for executing, maintaining, and scaling the consolidated data pipeline for Grupo_Bebidas. It details the system architecture, step-by-step execution workflows, operational procedures, and strategic recommendations for moving from development/mock stages to enterprise production.
 
@@ -29,6 +29,18 @@ The pipeline utilizes a modular multi-tier ETL (Extract, Transform, Load) model.
 4. **Configuration & Data Layer (`config.py`):** Houses metadata, regex/fuzzy dictionaries, static mappings, and staging query strings.
 
 ---
+
+Step 1: Initialization
+
+Execute the master process from the command-line interface or scheduling wrapper:
+Bash
+
+```python main.py```
+
+Upon execution, utils.py boots the logger, instantiates a file-writer appender to pipeline.log, and securely reads database coordinates from the environment.
+Step 2: Extraction
+
+The orchestrator walks through each registered sub-pipeline sequentially (Ventas -> Clientes -> Ordenes -> Productos -> Cashflow -> Calendario). For each domain, the pipeline connects to the respective source instances defined in config.py (DB_OLIVER_OLIVER, DB_RONES, and DB_BODEGAS_PEDRO) and queries the raw operational tables.
 
 Upon execution, `utils.py` boots the logger, instantiates a file-writer appender to `pipeline.log`, and securely reads database coordinates from the environment.
 
@@ -88,10 +100,11 @@ To transition this framework into an enterprise-grade production ecosystem, impl
 ### 6.1 Production Code Transition (Crucial Step)
 
 The codebase includes mock-data wrappers within `config.py` for testing and GitHub isolation. **Before publishing to production, modify the data loops.** Replace the testing functions with active SQL query calls:
-
+```python
 # Production Extraction Pattern Example
 source_engine = get_engine(db)
 df_raw = pd.read_sql_query(cf.sql_ventas(db), source_engine)
+```
 
 
 ### 6.2 Automation & Scheduling
