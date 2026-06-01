@@ -11,7 +11,6 @@ compania = ["Oliver", "Rones", "Bodegas"]
 
 # Mappings
 tipoproducto = {"PT": "Producto Terminado", "SV": "Servicios", "BP": "Botellas Producto Terminado"}
-client_name = {'Inversiones TUNC': 'DUFRY REP. DOMINICANA', 'Inversiones TUNC, SRL': 'DUFRY REP. DOMINICANA'}
 grupo_cliente = {'ACCIONISTA': 'ACCIONISTA', 'LOCAL': 'NACIONAL', 'Internacionales': 'INTERNACIONAL'}
 pais_corregido_oliver = {"C00020": "USA", "C00103": "Czech Republic", "C00097": "Austria"}
 
