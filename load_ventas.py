@@ -17,14 +17,14 @@ def transform(df: pd.DataFrame, company: str) -> pd.DataFrame:
     return df
 
 def run():
-    target_engine = get_engine("GRUPO_OLIVER")
+    target_engine = get_engine("GRUPO_EXPORT")
     for key, db in cf.bases_datos.items():
         dest_table = f"Ventas_{key}"
         logger.info(f"\nProcessing Ventas: {db} -> {dest_table}")
 
         try:
             # Replace with actual DB pull: df_raw = pd.read_sql(cf.sql_ventas(db), get_engine(db))
-            df_raw = cf.get_mock_ventas() 
+            df_raw = cf.mock_ventas() 
             df_clean = transform(df_raw, key)
             load_table(df_clean, dest_table, target_engine)
         except Exception as exc:
