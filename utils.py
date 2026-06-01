@@ -18,7 +18,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-def get_engine(db_name="GRUPO_OLIVER"):
+def get_engine(db_name="GRUPO_EXPORT"):
     """Create a SQLAlchemy engine using environment variables."""
     server = os.getenv("DB_SERVER", "localhost")
     user = os.getenv("DB_USER", "admin")
